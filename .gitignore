@@ -1,0 +1,11 @@
+# Sanal ortam
+venv/
+__pycache__/
+.pytest_cache/
+
+# Hassas veriler (ASLA GitHub'a gitmemeli)
+.env
+
+# Log dosyaları
+*.log
+logs/
