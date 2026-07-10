@@ -20,7 +20,7 @@ class income_Response(incomeBase):
 
 class expensesBase(BaseModel):
     amount:int
-    category:float
+    category:str
     description:str
 
 class expensesCreate(expensesBase):pass

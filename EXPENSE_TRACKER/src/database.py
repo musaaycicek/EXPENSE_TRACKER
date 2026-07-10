@@ -18,4 +18,4 @@ def get_db():
  try:
     yield db
  except Exception as e:
-    raise RuntimeError("Hata") from e
+    raise RuntimeError(f"Hata:{e}") from e
