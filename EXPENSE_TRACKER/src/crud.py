@@ -35,6 +35,7 @@ def update_income(id:int,db:Session,shema:shema.incomeCreate):
     db_income_update.amount=shema.amount
     db_income_update.category=shema.category
     db_income_update.description=shema.description
+    
 
     db.commit()
     db.refresh(db_income_update)
@@ -84,6 +85,20 @@ def expenses_add(db:Session,shema=shema.expensesCreate):
     db.refresh(add_db)
 
     return add_db
+
+# Belirli bir id değerine sahip  kayıt için Update işlemi
+def expenses_update(id:int,db:Session,shema=shema.expensesCreate):
+    update_expense=db.query(model.expenses).filter(shema.id==id).first()
+
+    update_expense.amount=shema.amount
+    update_expense.category=shema.category
+    update_expense.description=shema.description
+
+    db.commit()
+    db.refresh(update_expense)
+
+    return update_expense
+
 
 # Tüm veriyi getir
 def get_all_expenses(db:Session,offset=0,limit=3,):
@@ -149,5 +164,18 @@ def delete_budgets_byID(id:int,db:Session):
     db.commit() 
        
     return db_delete
+
+def budgets_update(db:Session,id:int,shema=shema.budgetCreate):
+
+    update_budgets=db.query(model.budgets).filter(model.budgets.id==id).first()
+
+    update_budgets.amount_limit=shema.category
+    update_budgets.category=shema.amount_limit
+
+    db.commit()
+    db.refresh(update_budgets)
+
+    return update_budgets
+
 
 
