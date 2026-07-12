@@ -76,7 +76,7 @@ def delete_income_byID(id:int,db:Session):
 
 # expenses tablosu için insert işlemi
 
-def expenses_add(db:Session,shema=shema.expensesCreate):
+def expenses_add(db:Session,shema:shema.expensesCreate):
     add_db=model.expenses(amount=shema.amount,
             category=shema.category,
             description=shema.description)
@@ -87,8 +87,8 @@ def expenses_add(db:Session,shema=shema.expensesCreate):
     return add_db
 
 # Belirli bir id değerine sahip  kayıt için Update işlemi
-def expenses_update(id:int,db:Session,shema=shema.expensesCreate):
-    update_expense=db.query(model.expenses).filter(shema.id==id).first()
+def expenses_update(id:int,db:Session,shema:shema.expensesCreate):
+    update_expense=db.query(model.expenses).filter(model.id==id).first()
 
     update_expense.amount=shema.amount
     update_expense.category=shema.category
@@ -165,7 +165,7 @@ def delete_budgets_byID(id:int,db:Session):
        
     return db_delete
 
-def budgets_update(db:Session,id:int,shema=shema.budgetCreate):
+def budgets_update(db:Session,id:int,shema:shema.budgetCreate):
 
     update_budgets=db.query(model.budgets).filter(model.budgets.id==id).first()
 

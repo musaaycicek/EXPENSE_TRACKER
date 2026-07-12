@@ -11,7 +11,7 @@ import shema
 router=APIRouter(prefix="/api/expenses",tags=["Expenses"])
 
 
-@router.post("/",response_model=shema.income_Response,tags=["expenses post"])
+@router.post("/",response_model=shema.expenses_Response,tags=["expenses post"])
 def add_expenses(income_data:shema.expensesCreate,db:Session=Depends(get_db)):
    
   return crud.expenses_add(db=db,shema=income_data)
@@ -22,7 +22,7 @@ def update(id:int,shema:shema.expensesCreate,db:Session=Depends(get_db)):
  return crud.expenses_update(id,db,shema=shema)
 
 
-@router.get("/all/",response_model=list[shema.income_Response],tags=["expenses get all"])
+@router.get("/all/",response_model=list[shema.expenses_Response],tags=["expenses get all"])
 def get_All_expense(offset:int=0,limit:int=10,db:Session=Depends(get_db)):
  return crud.get_all_expenses(db=db,offset=offset,limit=limit)
 
