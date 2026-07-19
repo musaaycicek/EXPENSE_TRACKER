@@ -6,7 +6,7 @@ from datetime import datetime
 import crud
 from database import get_db
 import shema
-import model
+
 
 
 router=APIRouter(prefix="/api/incomes",tags=["Incomes"])
@@ -27,6 +27,6 @@ def get_all_income(db:Session=Depends(get_db),offset=0,limit=3):
 def get_Id_incomes(id:int,db:Session=Depends(get_db)):
     return crud.get_expenses_byId(id,db)
 
-@router.delete("/deleteByID",response_model=shema.income_Response,tags=["incomes delete"])
+@router.delete("/deleteByID/{id}",response_model=shema.income_Response,tags=["incomes delete"])
 def delete(id:int,db:Session=Depends(get_db)):
     return crud.delete_expenses_byID(id,db)

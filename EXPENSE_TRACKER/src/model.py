@@ -34,3 +34,16 @@ class budgets(Base):
     id:Mapped[int]=mapped_column(primary_key=True,index=True)
     category:Mapped[str]=mapped_column(String(50),nullable=False)
     amount_limit:Mapped[float]=mapped_column(Numeric(10,2),nullable=False)
+
+
+
+# ŞİFRELEME İÇİN USER TABLOSU OLUŞTURDUK
+
+class User(Base):
+    __tablename__="users"
+
+    id:Mapped[int]=mapped_column(primary_key=True,index=True)
+    email:Mapped[str]=mapped_column(String(100),unique=True,index=True,nullable=False)
+    hashed_password:Mapped[str]=mapped_column(String(255),nullable=False)
+    date_created:Mapped[datetime]=mapped_column(DateTime,default=lambda:datetime.now(timezone.utc))
+    

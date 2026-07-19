@@ -17,7 +17,7 @@ def add_budgets(shema:shema.budgetCreate,db:Session=Depends(get_db)):
 def update_budgets(shema:shema.budgetCreate,id:int,db:Session=Depends(get_db)):
     return crud.budgets_update(shema,db,id)
 
-@router.get("/",response_model=shema.budget_Response,tags=["get all budgets"])
+@router.get("/all/",response_model=list[shema.budget_Response],tags=["get all budgets"])
 def get_all_budgets(limit=3,offset=0,db:Session=Depends(get_db)):
     return crud.get_all_budgets(db,limit,offset)
 
