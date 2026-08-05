@@ -1,7 +1,7 @@
 import model
 import shema
 from sqlalchemy.orm import Session
-import security
+from security import hash_password
 
 
 """ INCOME TABLOSU """
@@ -181,11 +181,13 @@ def budgets_update(db:Session,id:int,shema:shema.budgetCreate):
 
 # user için create işlemi yapmamız lazım
 def create_user(db:Session,user_create:shema.UserCreate):
-    hashed_pass=security.hash_password(user_create.password)
 
-    db_user=model.User(email=user_create.email,hashed_password=hashed_pass)
+    db_user=db.query(model.User).filter(model.User.email==user_create.email)
 
-    db.add(db_user)
+    hash_pass=hash_password(user_create.password)
+    new_user=model.User(email=user_create.email,hash_password=hash_pass)
+
+    db.add(new_user)
     db.commit()
     db.refresh(db_user)
 

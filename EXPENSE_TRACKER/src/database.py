@@ -11,11 +11,14 @@ class Base(DeclarativeBase):pass
 sessionLocal=sessionmaker(bind=engine,autoflush=False)
 
 
-db=sessionLocal()
+
 
 
 def get_db(): 
+ db=sessionLocal()
  try:
     yield db
  except Exception as e:
     raise RuntimeError(f"Hata:{e}") from e
+ finally:
+   db.close()

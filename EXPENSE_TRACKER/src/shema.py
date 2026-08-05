@@ -51,7 +51,7 @@ class budget_Response(budgetsBase):
 # password kısmını userbase içine yazarsak Response da şifre görünür
 
 class UserBase(BaseModel):
-    email:str
+    email:EmailStr
     
 
 class UserCreate(UserBase):
